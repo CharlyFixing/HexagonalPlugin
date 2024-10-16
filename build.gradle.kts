@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.charlyFixing"
-version = "1.0.5"
+version = "1.0.8"
 
 repositories {
   mavenCentral()
@@ -32,7 +32,7 @@ tasks {
 
   patchPluginXml {
     sinceBuild.set("222")
-    untilBuild.set("232.*")
+    untilBuild.set("244.*")
   }
 
   signPlugin {

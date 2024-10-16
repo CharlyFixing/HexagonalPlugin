@@ -74,48 +74,9 @@ public class AddSelectedTextAction extends AnAction {
             try {
 
                 String basePath = selectedFile.getPath();
-                String newDirPathInfra = basePath + "/infrastructure";
-                String newDirPathAppli = basePath + "/application";
-                String newDirPathDomai = basePath + "/domain";
-                Files.createDirectory(Paths.get(newDirPathInfra));
-                // adapter, config, controller, entities, repository, message
-                String newDirAdapters = newDirPathInfra + "/adapters";
-                String newDirConfig = newDirPathInfra + "/config";
-                String newDirController = newDirPathInfra + "/controllers";
-                String newDirEntitiesInf = newDirPathInfra + "/entities";
-                String newDirRepository = newDirPathInfra + "/repositories";
-                Files.createDirectory(Paths.get(newDirAdapters));
-                Files.createDirectory(Paths.get(newDirConfig));
-                Files.createDirectory(Paths.get(newDirController));
-                Files.createDirectory(Paths.get(newDirEntitiesInf));
-                Files.createDirectory(Paths.get(newDirRepository));
-
-                if(consumer.isSelected()){
-                    String newDirConsumer = newDirPathInfra + "/message/consumer";
-                    Files.createDirectories(Paths.get(newDirConsumer));
-                }
-                if(producer.isSelected()){
-                    String newDirProducer = newDirPathInfra + "/message/producer";
-                    Files.createDirectories(Paths.get(newDirProducer));
-                }
-
-                Files.createDirectory(Paths.get(newDirPathAppli));
-                //service and use case
-                String newDirServices = newDirPathAppli + "/services";
-                String newDirUseCases = newDirPathAppli + "/useCases";
-                Files.createDirectory(Paths.get(newDirServices));
-                Files.createDirectory(Paths.get(newDirUseCases));
-
-                Files.createDirectory(Paths.get(newDirPathDomai));
-                //entities, ports (in, out)
-                String newDirEntities = newDirPathDomai + "/entities";
-                String newDirIn = newDirPathDomai + "/port/in";
-                String newDirOut = newDirPathDomai + "/port/out";
-                Files.createDirectory(Paths.get(newDirEntities));
-                Files.createDirectories(Paths.get(newDirIn));
-                Files.createDirectories(Paths.get(newDirOut));
-
-
+                infrastructureDirectory(basePath, consumer, producer);
+                applicationDirectory(basePath);
+                domainDirectory(basePath);
 
                 Messages.showInfoMessage(project, "All files have been created", "Success");
 
@@ -136,4 +97,68 @@ public class AddSelectedTextAction extends AnAction {
         presentation.setVisible(selectedFile != null && selectedFile.isDirectory());
     }
 
+    public void infrastructureDirectory(String basePath, JCheckBox consumer, JCheckBox producer) throws IOException {
+        String newDirPathInfra = basePath + "/infrastructure";
+        Files.createDirectory(Paths.get(newDirPathInfra));
+
+        // dao, inputAdapter, outputAdapter, configuration
+        String newDirDao = newDirPathInfra + "/dao";
+        String newDirInputAdapter = newDirPathInfra + "/inputAdapter";
+        String newDirInputAdapterCon = newDirInputAdapter + "/controller";
+        String newDirInputAdapterV = newDirInputAdapter + "/validator";
+        String newDirInputAdapterC = newDirInputAdapter + "/converter";
+        String newDirInputAdapterF = newDirInputAdapter + "/feign";
+
+        String newDirOutPutAdapter = newDirPathInfra + "/outputAdapter";
+        String newDirOutPutAdapterP = newDirOutPutAdapter + "/persistence";
+
+        Files.createDirectory(Paths.get(newDirDao));
+        Files.createDirectory(Paths.get(newDirInputAdapter));
+        Files.createDirectory(Paths.get(newDirInputAdapterCon));
+        Files.createDirectory(Paths.get(newDirInputAdapterV));
+        Files.createDirectory(Paths.get(newDirInputAdapterC));
+        Files.createDirectory(Paths.get(newDirInputAdapterF));
+
+        Files.createDirectory(Paths.get(newDirOutPutAdapter));
+        Files.createDirectory(Paths.get(newDirOutPutAdapterP));
+
+        if(consumer.isSelected()){
+            String newDirConsumer = newDirOutPutAdapter + "/messaging/consumer";
+            Files.createDirectories(Paths.get(newDirConsumer));
+        }
+        if(producer.isSelected()){
+            String newDirProducer = newDirOutPutAdapter + "/messaging/producer";
+            Files.createDirectories(Paths.get(newDirProducer));
+        }
+    }
+    public void applicationDirectory(String basePath) throws IOException {
+        String newDirPathAppli = basePath + "/application";
+        Files.createDirectory(Paths.get(newDirPathAppli));
+        //service and use case
+
+        String newDirInputPort = newDirPathAppli + "/inputPort";
+        String newDirService = newDirPathAppli + "/service";
+        String newDirDto = newDirPathAppli + "/dto";
+        String newDirDtoR = newDirDto + "/request";
+        String newDirDtoRP = newDirDto + "/response";
+
+        Files.createDirectories(Paths.get(newDirInputPort));
+        Files.createDirectories(Paths.get(newDirService));
+        Files.createDirectories(Paths.get(newDirDto));
+        Files.createDirectories(Paths.get(newDirDtoR));
+        Files.createDirectories(Paths.get(newDirDtoRP));
+    }
+    public void domainDirectory(String basePath) throws IOException{
+        String newDirPathDomain = basePath + "/domain";
+        Files.createDirectory(Paths.get(newDirPathDomain));
+
+        //model, outputPort, repository
+        String newDirModel = newDirPathDomain + "/model";
+        String newDirOutPutPort = newDirPathDomain + "/outputPort";
+        String newDirRepository = newDirPathDomain + "/repository";
+
+        Files.createDirectory(Paths.get(newDirModel));
+        Files.createDirectory(Paths.get(newDirOutPutPort));
+        Files.createDirectory(Paths.get(newDirRepository));
+    }
 }
