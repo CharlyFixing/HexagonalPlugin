@@ -1,66 +1,59 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-  <id>com.charlyFixing.HexagonalCreator</id>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.charlyFixing.HexagonalCreator</id>
 
-  <!-- Public plugin name should be written in Title Case.
-       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-  <name>HexagonalCreator</name>
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>HexagonalCreator</name>
 
-  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-  <vendor email="charlyfixing@gmail.com" url="">CharlyFixing</vendor>
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="charlyfixing@gmail.com" url="">CharlyFixing</vendor>
 
-  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
-       Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
-       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-  <description><![CDATA[
-        This is an <b>awesome plugin</b> that helps you do amazing things with <i>IntelliJ IDEA</i>.<br>
-        <ul>
-            <li><a href="https://example.com">Visit our website</a></li>
-            <li>Follow us on <a href="https://twitter.com/example">Twitter</a></li>
-        </ul>
-        <p>Features include:</p>
-        <ol>
-            <li>Enhanced coding experience</li>
-            <li>Better project management</li>
-            <li>Customizable settings</li>
-        </ol>
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+        HexagonalCreator is an IntelliJ-based IDEA plugin to streamline file creation and ensure proper implementation
+        across different packages in your project, specifically following the principles of hexagonal architecture.
+        This tool is perfect for developers looking to maintain clean and organized code structures, enhancing productivity
+        and reducing errors while adhering to hexagonal architecture standards.
     ]]></description>
 
-  <!-- Product and plugin compatibility requirements.
-       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
-  <depends>com.intellij.modules.platform</depends>
-  <depends>com.intellij.modules.java</depends>
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
 
-  <!-- Extension points defined by the plugin.
-       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
-  <extensions defaultExtensionNs="com.intellij">
-    <projectViewNodeDecorator implementation="hexagonal.FolderDescriptionProvider"/>
-    <localInspection
-            id="cleanarchitecture.import.references.display.name"
-            language="JAVA"
-            bundle="settings.InspectionBundle"
-            groupPath="Java"
-            groupBundle="messages.InspectionsBundle"
-            groupKey="group.names.probable.bugs"
-            shortName="CleanArchitectureInspector"
-            enabledByDefault="true"
-            level="ERROR"
-            implementationClass="hexagonal.DependencyInspector"
-            displayName="CleanArchitectureInspector"/>
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <projectViewNodeDecorator implementation="hexagonal.FolderDescriptionProvider"/>
+        <localInspection
+                id="cleanarchitecture.import.references.display.name"
+                language="JAVA"
+                bundle="settings.InspectionBundle"
+                groupPath="Java"
+                groupBundle="messages.InspectionsBundle"
+                groupKey="group.names.probable.bugs"
+                shortName="CleanArchitectureInspector"
+                enabledByDefault="true"
+                level="ERROR"
+                implementationClass="hexagonal.DependencyInspector"
+                displayName="CleanArchitectureInspector"/>
 
-  </extensions>
-  <actions>
-    <action id="AddSelectedTextAction"
-            class="hexagonal.AddSelectedTextAction"
-            text="New Hexagonal Architecture"
-            description="New files structure"
-            icon="AllIcons.Actions.AddFile" >
+    </extensions>
+    <actions>
+        <action id="AddSelectedTextAction"
+                class="hexagonal.AddSelectedTextAction"
+                text="New Hexagonal Architecture"
+                description="New files structure"
+                icon="AllIcons.Actions.AddFile">
 
-      <add-to-group group-id="NewGroup"
-                    anchor="after"
-                    relative-to-action="NewDir"/>
+            <add-to-group group-id="NewGroup"
+                          anchor="after"
+                          relative-to-action="NewDir"/>
 
-    </action>
-  </actions>
+        </action>
+    </actions>
 </idea-plugin>
