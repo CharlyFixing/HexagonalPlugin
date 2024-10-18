@@ -102,28 +102,30 @@ public class AddSelectedTextAction extends AnAction {
         Files.createDirectory(Paths.get(newDirPathInfra));
 
         // dao, inputAdapter, outputAdapter, configuration
-        String newDirDao = newDirPathInfra + "/dao";
-        String newDirInputAdapter = newDirPathInfra + "/inputAdapter";
+        String newDirAdapter = newDirPathInfra + "/adapter";
+        String newDirConfig = newDirPathInfra + "/configuration";
+        String newDirInputAdapter = newDirAdapter + "/input";
         String newDirInputAdapterCon = newDirInputAdapter + "/controller";
         String newDirInputAdapterV = newDirInputAdapter + "/validator";
         String newDirInputAdapterC = newDirInputAdapter + "/converter";
-        String newDirInputAdapterF = newDirInputAdapter + "/feign";
 
-        String newDirOutPutAdapter = newDirPathInfra + "/outputAdapter";
+        String newDirOutPutAdapter = newDirAdapter + "/output";
+        String newDirOutAdapterF = newDirOutPutAdapter + "/feign";
         String newDirOutPutAdapterP = newDirOutPutAdapter + "/persistence";
 
-        Files.createDirectory(Paths.get(newDirDao));
-        Files.createDirectory(Paths.get(newDirInputAdapter));
-        Files.createDirectory(Paths.get(newDirInputAdapterCon));
+        Files.createDirectories(Paths.get(newDirAdapter));
+        Files.createDirectories(Paths.get(newDirConfig));
+        Files.createDirectories(Paths.get(newDirInputAdapter));
+        Files.createDirectories(Paths.get(newDirInputAdapterCon));
         Files.createDirectory(Paths.get(newDirInputAdapterV));
         Files.createDirectory(Paths.get(newDirInputAdapterC));
-        Files.createDirectory(Paths.get(newDirInputAdapterF));
 
-        Files.createDirectory(Paths.get(newDirOutPutAdapter));
+        Files.createDirectories(Paths.get(newDirOutPutAdapter));
+        Files.createDirectory(Paths.get(newDirOutAdapterF));
         Files.createDirectory(Paths.get(newDirOutPutAdapterP));
 
         if(consumer.isSelected()){
-            String newDirConsumer = newDirOutPutAdapter + "/messaging/consumer";
+            String newDirConsumer = newDirInputAdapter + "/messaging/consumer";
             Files.createDirectories(Paths.get(newDirConsumer));
         }
         if(producer.isSelected()){
@@ -136,13 +138,15 @@ public class AddSelectedTextAction extends AnAction {
         Files.createDirectory(Paths.get(newDirPathAppli));
         //service and use case
 
-        String newDirInputPort = newDirPathAppli + "/inputPort";
+        String newDirInputPort = newDirPathAppli + "/port/input";
+        String newDirOutPutPort = newDirPathAppli + "/port/output";
         String newDirService = newDirPathAppli + "/service";
         String newDirDto = newDirPathAppli + "/dto";
         String newDirDtoR = newDirDto + "/request";
         String newDirDtoRP = newDirDto + "/response";
 
         Files.createDirectories(Paths.get(newDirInputPort));
+        Files.createDirectories(Paths.get(newDirOutPutPort));
         Files.createDirectories(Paths.get(newDirService));
         Files.createDirectories(Paths.get(newDirDto));
         Files.createDirectories(Paths.get(newDirDtoR));
@@ -154,11 +158,9 @@ public class AddSelectedTextAction extends AnAction {
 
         //model, outputPort, repository
         String newDirModel = newDirPathDomain + "/model";
-        String newDirOutPutPort = newDirPathDomain + "/outputPort";
         String newDirRepository = newDirPathDomain + "/repository";
 
         Files.createDirectory(Paths.get(newDirModel));
-        Files.createDirectory(Paths.get(newDirOutPutPort));
         Files.createDirectory(Paths.get(newDirRepository));
     }
 }
