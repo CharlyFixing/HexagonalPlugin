@@ -47,7 +47,11 @@ public class FolderDescriptionProvider implements ProjectViewNodeDecorator {
                         data.setLocationString("Contains domain entities that represent the core of the business logic.");
                         break;
                     case "model":
-                        data.setLocationString("Contains classes that represent domain models and encapsulate business rules.");
+                        if ("domain".equals(parentFolder)) {
+                            data.setLocationString("Contains classes that represent domain models and encapsulate business rules.");
+                        } else if ("persistence".equals(parentFolder)) {
+                            data.setLocationString("Contains classes that represent infrastructure models, which may include database entities or mappings.");
+                        }
                         break;
                     case "repository":
                         data.setLocationString("Contains interfaces for data access and persistence operations.");
